@@ -8,3 +8,4 @@ imbalanced-learn
 matplotlib
 seaborn
 joblib
+shap
