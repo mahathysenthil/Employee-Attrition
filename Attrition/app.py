@@ -4,7 +4,9 @@ import numpy as np
 import joblib
 import shap
 import matplotlib.pyplot as plt
-
+import os
+st.write("Current directory:", os.getcwd())
+st.write("Files:", os.listdir())
 st.set_page_config(page_title="Employee Attrition Risk Dashboard", layout="wide")
 
 # ---------------------------------------------------------------
