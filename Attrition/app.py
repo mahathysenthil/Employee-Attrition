@@ -23,7 +23,20 @@ def load_artifacts():
     return model, scaler, encoders, feature_names, explainer, reference_df
 
 model, scaler, encoders, feature_names, explainer, reference_df = load_artifacts()
+
+st.title("Employee Attrition Risk Dashboard")
+st.caption("XGBoost model + SHAP explainability, trained on the IBM HR Analytics dataset")
+
+tab1, tab2 = st.tabs([
+    "Single Employee Check",
+    "Department Overview"
+])
+
 # ---------------------------------------------------------------
+# TAB 1: Single employee — form input, risk score, SHAP waterfall
+# ---------------------------------------------------------------
+with tab1:
+    st.subheader("Score a single employee")
 # TAB 1: Single employee — form input, risk score, SHAP waterfall
 # ---------------------------------------------------------------
 with tab1:
