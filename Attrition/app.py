@@ -4,29 +4,25 @@ import numpy as np
 import joblib
 import shap
 import matplotlib.pyplot as plt
+import os
 
 st.set_page_config(page_title="Employee Attrition Risk Dashboard", layout="wide")
 
-# ---------------------------------------------------------------
-# Load artifacts (produced by STEP 14 in the notebook)
-# ---------------------------------------------------------------
+# Folder where app.py is located
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+
 @st.cache_resource
 def load_artifacts():
-    model = joblib.load("attrition_model.pkl")
-    scaler = joblib.load("attrition_scaler.pkl")
-    encoders = joblib.load("attrition_encoders.pkl")
-    feature_names = joblib.load("attrition_features.pkl")
-    explainer = joblib.load("attrition_explainer.pkl")
-    reference_df = pd.read_csv("attrition_reference.csv")
+    model = joblib.load(os.path.join(BASE_DIR, "attrition_model.pkl"))
+    scaler = joblib.load(os.path.join(BASE_DIR, "attrition_scaler.pkl"))
+    encoders = joblib.load(os.path.join(BASE_DIR, "attrition_encoders.pkl"))
+    feature_names = joblib.load(os.path.join(BASE_DIR, "attrition_features.pkl"))
+    explainer = joblib.load(os.path.join(BASE_DIR, "attrition_explainer.pkl"))
+    reference_df = pd.read_csv(os.path.join(BASE_DIR, "attrition_reference.csv"))
+
     return model, scaler, encoders, feature_names, explainer, reference_df
 
 model, scaler, encoders, feature_names, explainer, reference_df = load_artifacts()
-
-st.title("Employee Attrition Risk Dashboard")
-st.caption("XGBoost model + SHAP explainability, trained on the IBM HR Analytics dataset")
-
-tab1, tab2 = st.tabs(["Single Employee Check", "Department Overview"])
-
 # ---------------------------------------------------------------
 # TAB 1: Single employee — form input, risk score, SHAP waterfall
 # ---------------------------------------------------------------
